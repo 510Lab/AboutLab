@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+	<!-- -load_state_filename lab_map.pbstream -->
+	<node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="
+		-configuration_directory $(find qingzhou_nav)/config/cartographer"
+		output="screen">
+	</node>
+	<node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" />
+</launch>

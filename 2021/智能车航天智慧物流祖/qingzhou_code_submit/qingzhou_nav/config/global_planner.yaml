@@ -1,0 +1,8 @@
+base_global_planner: global_planner/GlobalPlanner
+GlobalPlanner:
+  allow_unknown: true
+  default_tolerance: 0.5
+  use_dijkstra: true
+  orientation_mode: 3
+  visualize_potential: false #debug
+

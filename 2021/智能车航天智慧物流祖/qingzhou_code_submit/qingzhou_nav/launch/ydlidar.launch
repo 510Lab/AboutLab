@@ -1,0 +1,21 @@
+<launch>
+  <node name="ydlidar_node"  pkg="ydlidar_ros"  type="ydlidar_node" output="screen" respawn="true">
+    <param name="port"         type="string" value="/dev/ydlidar"/>  
+    <param name="baudrate"     type="int"    value="128000"/>
+    <param name="frame_id"     type="string" value="laser_frame"/>
+    <param name="range_min"    type="double" value="0.1" />
+    <param name="range_max"    type="double" value="12.0" />
+    <param name="samp_rate"    type="int"    value="5"/>
+    <param name="frequency"    type="double" value="8"/>
+    <remap from="scan" to="scan_raw" />
+  </node>
+
+  <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_laser"
+    args="0.135 0.0 0.15 3.1415926 0.0 0.0 base_link laser_frame" />
+
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" output="screen">
+    <remap from="scan" to="scan_raw" />
+    <remap from="scan_filtered" to="scan" />
+    <rosparam command="load" file="$(find qingzhou_nav)/config/laser_filter.yaml" />
+  </node>
+</launch>

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<launch>
+	<include file="$(find qingzhou_nav)/launch/ydlidar.launch" />
+	<include file="$(find qingzhou_nav)/launch/cartographer.launch" />
+	<!--<include file="$(find qingzhou_nav)/launch/camera.launch" />
+	<node pkg="traffic_light_detector" type="traffic_light_detector" name="traffic_light_detector" output="screen" />
+	--><node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+		<rosparam file="$(find qingzhou_nav)/config/move_base.yaml" command="load" />
+
+		<rosparam file="$(find qingzhou_nav)/config/costmap_common.yaml" command="load" ns="global_costmap" />
+		<rosparam file="$(find qingzhou_nav)/config/global_costmap.yaml" command="load" ns="global_costmap" />
+
+		<rosparam file="$(find qingzhou_nav)/config/costmap_common.yaml" command="load" ns="local_costmap" />
+		<rosparam file="$(find qingzhou_nav)/config/local_costmap.yaml" command="load" ns="local_costmap" />
+
+		<rosparam file="$(find qingzhou_nav)/config/global_planner.yaml" command="load" />
+		<rosparam file="$(find qingzhou_nav)/config/dwa_local_planner.yaml" command="load" />
+	</node>
+
+</launch>
